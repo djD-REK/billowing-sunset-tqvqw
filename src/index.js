@@ -1,12 +1,19 @@
 import "./styles.css";
 
 document.getElementById("app").innerHTML = `
-<h1>Hello Vanilla!</h1>
-<div>
-  We use Parcel to bundle this sandbox, you can find more info about Parcel
-  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
-</div>
+<h1>Hello RTS Labs!</h1>
+<p>
+  Thanks for the opportunity to interview!
+</p>
+<h4>Best regards,<br/>Derek</h4>
 `;
+
+/**
+ * Question 1 - Derek Austin
+ * Print the number of integers in an array that are above the
+ * given input and the number that are below, e.g. for the array
+ * [1, 5, 2, 1, 10] with input 6, print "above: 1, below: 4"`);
+ */
 
 console.log(`Question 1 - Derek Austin
 Print the number of integers in an array that are above the
@@ -15,15 +22,27 @@ given input and the number that are below, e.g. for the array
 
 const array = [1, 5, 2, 1, 10];
 const inputThreshold = 6;
-// Implementation using reduce
+/**
+ * Returns a string in the format "above: #, below: #"
+ * based on the number of integers in an array that
+ * are above and below the given input threshold
+ * @param  {Array}  array          The array of integers
+ * @param  {Number} inputThreshold The input threshold
+ * @return {String}                The counts above and below
+ * (Version 1/3: Implementation using reduce)
+ */
 const aboveAndBelow = (array, inputThreshold) => {
+  // Count the number of integers above the threshold using reduce to check each element
   const above = array.reduce(
     (accumulator, currentValue) =>
+      // Add 1 to the accumulator if the value is above the input threshold
       currentValue > inputThreshold ? (accumulator += 1) : accumulator,
     0
   );
+  // Count the number of integers below the threshold using reduce to check each element
   const below = array.reduce(
     (accumulator, currentValue) =>
+      // Add 1 to the accumulator if the value is below the input threshold
       currentValue < inputThreshold ? (accumulator += 1) : accumulator,
     0
   );
@@ -35,13 +54,25 @@ aboveAndBelow([${array}], ${inputThreshold})
 Result: "${aboveAndBelow(array, inputThreshold)}"`);
 // Result: "above: 1, below: 4"
 
+/**
+ * Returns a string in the format "above: #, below: #"
+ * based on the number of integers in an array that
+ * are above and below the given input threshold
+ * @param  {Array}  array          The array of integers
+ * @param  {Number} inputThreshold The input threshold
+ * @return {String}                The counts above and below
+ * (Version 2/3: Implementation using map)
+ */
 const aboveAndBelowMap = (array, inputThreshold) => {
+  // Create an accumulator object to keep our counts
   const accumulator = { above: 0, below: 0 };
-  // Alternative implementation: Using map
+  // Count the number of integers above and below the threshold using map to check each value
   array.map(value => {
     if (value > inputThreshold) {
+      // Add 1 to the accumulator if the value is above the input threshold
       accumulator.above += 1;
     } else if (value < inputThreshold) {
+      // Add 1 to the accumulator if the value is below the input threshold
       accumulator.below += 1;
     }
   });
@@ -52,24 +83,36 @@ aboveAndBelowMap([${array}], ${inputThreshold})
 Result: "${aboveAndBelowMap(array, inputThreshold)}"`);
 // Result: "above: 1, below: 4"
 
-// Alternative implementation: Using for loop
-const aboveAndBelowForEach = (array, inputThreshold) => {
+/**
+ * Returns a string in the format "above: #, below: #"
+ * based on the number of integers in an array that
+ * are above and below the given input threshold
+ * @param  {Array}  array          The array of integers
+ * @param  {Number} inputThreshold The input threshold
+ * @return {String}                The counts above and below
+ * (Version 3/3: Implementation using for loop)
+ */
+const aboveAndBelowForLoop = (array, inputThreshold) => {
+  // Create various variables for our counts and the for loop index
   let aboveThreshold = 0;
   let belowThreshold = 0;
   let i = 0;
+  // Iterate over the array using a for loop to count the number of integers above and below the threshold
   for (i = 0; i < array.length; i++) {
     let value = array[i];
     if (value > inputThreshold) {
+      // Add 1 to the accumulator if the value is above the input threshold
       aboveThreshold += 1;
     } else if (value < inputThreshold) {
+      // Add 1 to the accumulator if the value is below the input threshold
       belowThreshold += 1;
     }
   }
   return `above: ${aboveThreshold}, below: ${belowThreshold}`;
 };
-console.log(`*** Implementation using reduce ***
-aboveAndBelowForEach([${array}], ${inputThreshold})
-Result: "${aboveAndBelowForEach(array, inputThreshold)}"`);
+console.log(`*** Implementation using for loop ***
+aboveAndBelowForLoop([${array}], ${inputThreshold})
+Result: "${aboveAndBelowForLoop(array, inputThreshold)}"`);
 // Result: "above: 1, below: 4"
 
 // Unit test:
@@ -86,10 +129,26 @@ const unitTest = () => {
 };
 unitTest(array, inputThreshold);
 
+/**
+ * Question 2 - Derek Austin
+ * Rotate the characters in a string by a given input and have the overflow
+ * appear at the beginning, e.g. “MyString” rotated by 2 is “ngMyStri”.`);
+ */
+
 console.log(`Question 2 - Derek Austin
 Rotate the characters in a string by a given input and have the overflow
 appear at the beginning, e.g. “MyString” rotated by 2 is “ngMyStri”.`);
 
+/**
+ * Returns the input string rotated by the specified
+ * number of characters, with the overflow appearing
+ * at the beginning.
+ * For example, "Hello" rotated by 2 would be "loHel"
+ * @param  {Array}  [inputString = ""]      The string to be rotated
+ * @param  {Number} [howManyCharacters = 0] How far to rotate
+ * @return {String}                         The rotated string
+ * (Version 1/3: Longhand implementation, no type checking)
+ */
 const rotateString = (inputString = "", howManyCharacters = 0) => {
   // Optional type checking:
   // if (inputString == null || typeof inputString !== "string") return "";
@@ -104,7 +163,16 @@ rotateString("MyString", 3)
 Result: "${rotateString("MyString", 3)}"`);
 // Result "tringMyS"
 
-// Condensed, with type coercion to string:
+/**
+ * Returns the input string rotated by the specified
+ * number of characters, with the overflow appearing
+ * at the beginning.
+ * For example, "Hello" rotated by 2 would be "loHel"
+ * @param  {Array}  [inputString = ""]      The string to be rotated
+ * @param  {Number} [howManyCharacters = 0] How far to rotate
+ * @return {String}                         The rotated string
+ * (Version 2/3: Condensed, with type coercion)
+ */
 const rotateStringCoercion = (inputString = "", howManyCharacters = 0) => {
   inputString += "";
   return (
@@ -119,7 +187,16 @@ rotateStringCoercion(3)
 Result: "${rotateStringCoercion(3)}"`);
 // Results: "tringMyS" and "3"
 
-// One line with type checking:
+/**
+ * Returns the input string rotated by the specified
+ * number of characters, with the overflow appearing
+ * at the beginning.
+ * For example, "Hello" rotated by 2 would be "loHel"
+ * @param  {Array}  [inputString = ""]      The string to be rotated
+ * @param  {Number} [howManyCharacters = 0] How far to rotate
+ * @return {String}                         The rotated string
+ * (Version 3/3: Condensed to one line, with type checking)
+ */
 const rotateStringOneLine = (inputString = "", howManyCharacters = 0) =>
   inputString == null || typeof inputString !== "string"
     ? ""
@@ -165,6 +242,12 @@ possibleRotations.map(howFar => {
     `Test: ${result} ${story}: ${output} should match ${expectations[howFar]}`
   );
 });
+
+/**
+ * Question 3 - Derek Austin
+ * If you could change 1 thing about your favorite
+ * framework/language/platform (pick one), what would it be?
+ */
 
 console.log(`Question 3 - Derek Austin
 If you could change 1 thing about your favorite
