@@ -178,7 +178,9 @@ Result: "${rotateString("MyString", 3)}"`);
  * (Version 2/3: Condensed, with type coercion)
  */
 const rotateStringCoercion = (inputString = "", howManyCharacters = 0) => {
+  // Force type coercion to String by using the + operator to add the empty string
   inputString += "";
+  // Alternatively, for readability: let definitelyString = String(inputString);
   return (
     inputString.substring(howManyCharacters, inputString.length) +
     inputString.substring(0, howManyCharacters)
@@ -202,10 +204,11 @@ Result: "${rotateStringCoercion(3)}"`);
  * (Version 3/3: Condensed to one line, with type checking)
  */
 const rotateStringOneLine = (inputString = "", howManyCharacters = 0) =>
+  // Check to be sure inputString is not null and is of type string
   inputString == null || typeof inputString !== "string"
-    ? ""
+    ? "" // Either null or not a string type, so return the empty string
     : inputString.substring(howManyCharacters, inputString.length) +
-      inputString.substring(0, howManyCharacters);
+      inputString.substring(0, howManyCharacters); // Return the rotated string
 console.log(`*** One line function, with type checking ***
 rotateStringOneLine("MyString", 3)
 Result: "${rotateStringOneLine("MyString", 3)}"
