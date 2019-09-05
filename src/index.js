@@ -15,10 +15,12 @@ document.getElementById("app").innerHTML = `
  * [1, 5, 2, 1, 10] with input 6, print "above: 1, below: 4"`);
  */
 
-console.log(`Question 1 - Derek Austin
-Print the number of integers in an array that are above the
-given input and the number that are below, e.g. for the array
-[1, 5, 2, 1, 10] with input 6, print "above: 1, below: 4"`);
+console.log(`/**
+* Question 1 - Derek Austin
+* Print the number of integers in an array that are above the
+* given input and the number that are below, e.g. for the array
+* [1, 5, 2, 1, 10] with input 6, print "above: 1, below: 4"
+*/`);
 
 const array = [1, 5, 2, 1, 10];
 const inputThreshold = 6;
@@ -93,12 +95,11 @@ Result: "${aboveAndBelowMap(array, inputThreshold)}"`);
  * (Version 3/3: Implementation using for loop)
  */
 const aboveAndBelowForLoop = (array, inputThreshold) => {
-  // Create various variables for our counts and the for loop index
+  // Create our counter variables
   let aboveThreshold = 0;
   let belowThreshold = 0;
-  let i = 0;
   // Iterate over the array using a for loop to count the number of integers above and below the threshold
-  for (i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let value = array[i];
     if (value > inputThreshold) {
       // Add 1 to the accumulator if the value is above the input threshold
@@ -117,7 +118,7 @@ Result: "${aboveAndBelowForLoop(array, inputThreshold)}"`);
 
 // Unit test:
 console.log(`*** Unit test ***`);
-const unitTest = () => {
+(function unitTest() {
   const story = `Count numbers above and below 6 in [1, 5, 2, 1, 10]`;
   const expectation = "above: 1, below: 4";
   const output = aboveAndBelow([1, 5, 2, 1, 10], 6);
@@ -126,18 +127,21 @@ const unitTest = () => {
     `Test: ${result} ${story}
             ${output} should match ${expectation}`
   );
-};
-unitTest(array, inputThreshold);
+})(); // Encapsulated as an IIFE so the function runs automatically
 
 /**
  * Question 2 - Derek Austin
- * Rotate the characters in a string by a given input and have the overflow
- * appear at the beginning, e.g. “MyString” rotated by 2 is “ngMyStri”.`);
+ * Rotate the characters in a string by a given input and
+ * have the overflow appear at the beginning, e.g.
+ * “MyString” rotated by 2 is “ngMyStri”.`);
  */
 
-console.log(`Question 2 - Derek Austin
-Rotate the characters in a string by a given input and have the overflow
-appear at the beginning, e.g. “MyString” rotated by 2 is “ngMyStri”.`);
+console.log(`/**
+* Question 2 - Derek Austin
+* Rotate the characters in a string by a given input and
+* have the overflow appear at the beginning, e.g.
+* “MyString” rotated by 2 is “ngMyStri”.
+*/`);
 
 /**
  * Returns the input string rotated by the specified
@@ -210,38 +214,49 @@ Result: "${rotateStringOneLine(3)}"`);
 // Results: "tringMyS" and ""
 
 // Unit test:
-console.log(`*** Unit test ***`);
-const story = `Rotate string by 2 characters`;
-const input = "MyString";
-const expectation = "StringMy";
-const output = rotateString(input, 2);
-const result = output === expectation ? "✓PASS" : "✗FAIL";
-console.log(`Test: ${result} ${story}
-            ${output} should match ${expectation}`);
-
-// Expanded unit test:
-console.log(`*** Expanded unit tests ***`);
-const possibleRotations = Array.from(Array(input.length + 1).keys()); // Generate array of possible rotations up to input's length
-const expectations = [
-  "MyString",
-  "yStringM",
-  "StringMy",
-  "tringMyS",
-  "ringMySt",
-  "ingMyStr",
-  "ngMyStri",
-  "gMyStrin",
-  "MyString"
-];
-possibleRotations.map(howFar => {
-  const story = `Rotate string by ${howFar} characters`;
+const unitTest = () => {
+  // Anonymous function assigned to the const unitTest
+  console.log(`*** Unit test ***`);
+  const story = `Rotate string by 2 characters`;
   const input = "MyString";
-  const output = rotateString(input, howFar);
-  const result = output === expectations[howFar] ? "✓PASS" : "✗FAIL";
-  console.log(
-    `Test: ${result} ${story}: ${output} should match ${expectations[howFar]}`
-  );
-});
+  const expectation = "StringMy";
+  const output = rotateString(input, 2);
+  const result = output === expectation ? "✓PASS" : "✗FAIL";
+  console.log(`Test: ${result} ${story}
+            ${output} should match ${expectation}`);
+};
+// Run unit test for rotateString
+unitTest();
+
+// Expanded unit tests:
+console.log(`*** Expanded unit tests ***`);
+const runTestSuite = function generateUnitTests() {
+  // Using a named function for maximum code readability
+  const input = "MyString";
+  const possibleRotations = Array.from(Array(input.length + 1).keys()); // Generate array of possible rotations up to input's length
+  const expectations = [
+    "MyString",
+    "yStringM",
+    "StringMy",
+    "tringMyS",
+    "ringMySt",
+    "ingMyStr",
+    "ngMyStri",
+    "gMyStrin",
+    "MyString"
+  ];
+  possibleRotations.map(howFar => {
+    const story = `Rotate string by ${howFar} characters`;
+    const input = "MyString";
+    const output = rotateString(input, howFar);
+    const result = output === expectations[howFar] ? "✓PASS" : "✗FAIL";
+    console.log(
+      `Test: ${result} ${story}: ${output} should match ${expectations[howFar]}`
+    );
+  });
+};
+// Run test suite for rotateString
+runTestSuite();
 
 /**
  * Question 3 - Derek Austin
@@ -249,10 +264,13 @@ possibleRotations.map(howFar => {
  * framework/language/platform (pick one), what would it be?
  */
 
-console.log(`Question 3 - Derek Austin
-If you could change 1 thing about your favorite
-framework/language/platform (pick one), what would it be?`);
+console.log(`/**
+* Question 3 - Derek Austin
+* If you could change 1 thing about your favorite
+* framework/language/platform (pick one), what would it be?
+*/`);
 
-console.log(`I have a personal preference (probably from Ruby) against semicolons,
-so I would love for JavaScript developers to agree: let’s stop using
-semicolons and update our prettier configs. -Derek 😁`);
+console.log(`I have a personal preference (probably from Ruby) against
+semicolons, so I would love for JavaScript developers to agree:
+let’s all stop using semicolons and update our prettier configs.
+-Derek 😁`);
